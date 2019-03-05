@@ -7,6 +7,7 @@ function fm_preflight() {
     TMGIT_TREE="${2}"
 	TMGIT_GIT="$(which git)"
     TMGIT_ARGS="--git-dir ${TMGIT_DIR}/.dotfiles/.git --work-tree ${TMGIT_TREE}"
+    TMGIT="${TMGIT_GIT} ${TMGIT_ARGS}"
 
     # variáveis utilizadas pelo git parametrizado (tmgit)
     # Check which branch we are

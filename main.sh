@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 ### Arquivo main.sh
 ### Este é o arquivo a ser executado e que importará todos os outros

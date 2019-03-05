@@ -9,16 +9,16 @@
 function main() {
 
     # Realizar verificações de ambiente
-    fm_preflight
+    fm_preflight $@
 
     # Preparar ambiente para a execução do programa
-    fm_climb
+    fm_climb $@
 
     # Realizar as operações que compreendem a lógica central do projeto
-    fm_fly
+    fm_fly $@
 
     # Realizar tratamentos de erro e geração de logs
-    fm_land
+    fm_land $@
 
 }
 

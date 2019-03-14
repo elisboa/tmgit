@@ -3,16 +3,21 @@ function fm_preflight() {
 
     ## Inicializar variáveis
     # variáveis relacionadas ao binário git
+    # O primeiro argumento passado deve ser o diretório .git do repositório 
     TMGIT_DIR="${1}"
+    # O segundo argumento passado deve ser o diretório de trabalho onde os arquivos serão versionados (/home/user, por exemplo)
     TMGIT_TREE="${2}"
+    # Pegando o caminho do binário do git
 	TMGIT_GIT="$(which git)"
+    # Montando os parâmetros passados para o GIT
     TMGIT_ARGS="--git-dir ${TMGIT_DIR}/.dotfiles/.git --work-tree ${TMGIT_TREE}"
+    # concatenando o caminho do binário do git com os argumentos passados
     TMGIT="${TMGIT_GIT} ${TMGIT_ARGS}"
 
     # variáveis utilizadas pelo git parametrizado (tmgit)
     # Check which branch we are
-	CUR_BRANCH="IT SHOULD BE A PATTERN OF YYYY.MM.DD"
-    TODAY_DATE="MUST BE YEAR.MONTH.DAY USING DATE COMMAND"
+	CUR_BRANCH="IT SHOULD BE A PATTERN LIKE YYYY.MM.DD"
+    TODAY_DATE="MUST BE YEAR.MONTH.DAY USING DATE COMMAND, LIKE YYYY.MM.DD"
     COMMIT_DATE="SHOULD BE YEAR.MONTH.DAY.HOUR.MINUTE.SECOND USING DATE COMMAND"
     # Force current language to C, so all git messages are in default english
     LANG="C"
@@ -23,7 +28,7 @@ function fm_preflight() {
     LAND_CALLER="NOME DA FUNÇÃO QUE CHAMA A FUNÇÃO DE ENCERRAMENTO"
 
 
-    # debug
+#    debug
 #    shift
 #    echo "Mostrando todos os argumentos passados"
 #    echo "$@"

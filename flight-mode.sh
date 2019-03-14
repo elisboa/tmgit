@@ -93,9 +93,21 @@ function fm_land() {
     LAND_MSG="${2}"
     LAND_ERRMSG="${3}"
 
-    echo "Iniciando aterrissagem chamada por ${LAND_CALLER}"
-    echo "Encerrando programa: ${LAND_MSG}"
-    echo "Mensagem de erro: ${LAND_ERRMSG}"
+    # Exibir as mensagens abaixo APENAS se a variável contiver alguma coisa
+    if [[ -n ${LAND_CALLER} ]]
+    then
+        echo "Iniciando aterrissagem chamada por ${LAND_CALLER}"
+    fi
+
+    if [[ -n ${LAND_MSG} ]]
+    then
+        echo "Encerrando programa: ${LAND_MSG}"
+    fi
+
+    if [[ -n ${LAND_ERRMSG} ]]
+    then
+        echo "Mensagem de erro: ${LAND_ERRMSG}"
+    fi
 
     exit
 }

@@ -91,7 +91,7 @@ function fm_land() {
     LAND_MSG="${2}"
     # 3. Mensagem de erro (opcional)
     LAND_ERRMSG="${3}"
-    # 4. Número do erro (se vazio ou 0, sair com sucesso)
+    # 4. Número do código de erro (se vazio ou 0, sair com sucesso)
     LAND_ERRLVL="${4}"
 
     # Exibir as mensagens abaixo APENAS se a variável contiver alguma coisa

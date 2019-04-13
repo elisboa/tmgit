@@ -84,14 +84,15 @@ fi
 
 # Encerrar operações
 function fm_land() {
-    # Esperados 3 argumentos, 2 obrigatórios: 
+    # Esperados 4 argumentos:
     # 1. Função chamadora
-    # 2. Mensagem de encerramento
-    # 3. Mensagem de erro (opcional)
-
     LAND_CALLER="${1}"
+    # 2. Mensagem de encerramento
     LAND_MSG="${2}"
+    # 3. Mensagem de erro (opcional)
     LAND_ERRMSG="${3}"
+    # 4. Número do erro (se vazio ou 0, sair com sucesso)
+    LAND_ERRLVL="${4}"
 
     # Exibir as mensagens abaixo APENAS se a variável contiver alguma coisa
     if [[ -n ${LAND_CALLER} ]]

@@ -42,7 +42,7 @@ function fm_preflight() {
     if [[ ${#} -lt 2 ]]
     then
         LAND_ERRMSG="${#}"
-        LAND_MSG="Número de argumentos insuficiente, pois menor que 2"
+        LAND_MSG="Número de argumentos insuficiente, pois menor que 2: 1. git-dir; 2. worktree"
         
         # Encerrar programa enviando mensagens de erro e função chamadora
         fm_land "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"

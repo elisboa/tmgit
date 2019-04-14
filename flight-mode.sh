@@ -132,18 +132,6 @@ function fm_climb() {
         fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
     fi
 
-    LAND_MSG="Criacao do arquivo .gitignore"
-    if echo "*" > "${TMGIT_TREE}/.gitignore"
-    then
-        LAND_ERRMSG="Arquivo .gitignore criado com sucesso"
-    else
-        LAND_ERRMSG="Falha ao criar .gitignore em ${TMGIT_TREE}/.gitignore"
-        LAND_ERRLVL=9
-        fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
-    fi
-
-    git --git-dir "${TMGIT_DIR}" --work-tree  "${TMGIT_TREE}" status
-
 }
 
 #

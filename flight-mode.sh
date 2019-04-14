@@ -28,7 +28,7 @@ function fm_preflight() {
     LAND_ERRMSG="DEVE CONTER UMA MENSAGEM DE ERRO DO PROGRAMA EXECUTADO"
     LAND_CALLER="NOME DA FUNÇÃO QUE CHAMA A FUNÇÃO DE ENCERRAMENTO"
 
-
+ 
 #    debug
 #    shift
 #    echo "Mostrando todos os argumentos passados"
@@ -142,7 +142,8 @@ function fm_climb() {
         fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
     fi
 
-    LAND_MSG="Criacao do arquivo .gitignore"
+    git --git-dir "${TMGIT_DIR}" --work-tree  "${TMGIT_TREE}" status
+
 }
 
 #

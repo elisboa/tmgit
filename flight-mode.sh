@@ -99,23 +99,29 @@ function fm_climb() {
         cd "${TMGIT_TREE}" &&\
         if git init --separate-git-dir "${TMGIT_DIR}"
         then
-            echo -ne "Diretorio inicializado com sucesso"
+            LAND_ERRMSG="Diretorio ${TMGIT_DIR} inicializado com sucesso"
         else
-            echo -ne "Falha ao inicializar o diretorio ${TMGIT_DIR}"
+            LAND_ERRLVL=6
+            LAND_ERRMSG="Falha ao inicializar o diretorio ${TMGIT_DIR}"
+            fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
         fi
         
         if echo "*" > "${TMGIT_DIR}/.gitignore"
         then
-            echo "Adicionado arquivo .gitignore com sucesso"
+            LAND_ERRMSG="Adicionado arquivo .gitignore com sucesso"
         else
-            echo "Falha ao adcionar arquivo .gitignore"
+            LAND_ERRLVL=7
+            LAND_ERRMSG="Falha ao adcionar arquivo .gitignore"
+            fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
         fi
         
         if echo "*" > "${TMGIT_DIR}/.gitignore"
         then
-            echo "Adicionado arquivo .gitignore com sucesso"
+            LAND_ERRMSG="Adicionado arquivo .gitignore com sucesso"
         else
-            echo "Falha ao adcionar arquivo .gitignore"
+            LAND_ERRLVL=8
+            LAND_ERRMSG="Falha ao adcionar arquivo .gitignore"
+            fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
         fi
 
         git --git-dir "${TMGIT_DIR}" --work-tree  "${TMGIT_TREE}" status

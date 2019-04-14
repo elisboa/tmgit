@@ -3,14 +3,14 @@ function fm_preflight() {
 
     ## Inicializar variáveis
     # variáveis relacionadas ao binário git
-    # O primeiro argumento passado deve ser o diretório .git do repositório 
-    TMGIT_DIR="${1}"
-    # O segundo argumento passado deve ser o diretório de trabalho onde os arquivos serão versionados (/home/user, por exemplo)
-    TMGIT_TREE="${2}"
+    # O primerio argumento passado deve ser o diretório de trabalho onde os arquivos serão versionados (/home/user, por exemplo)
+    TMGIT_TREE="${1}"
+    # O segundo argumento passado deve ser o diretório ".git" do repositório 
+    TMGIT_DIR="${2}"
     # Pegando o caminho do binário do git
 	TMGIT_GIT="$(which git)"
     # Montando os parâmetros passados para o GIT
-    TMGIT_ARGS="--git-dir ${TMGIT_DIR}/.dotfiles/.git --work-tree ${TMGIT_TREE}"
+    TMGIT_ARGS="--git-dir ${TMGIT_DIR} --work-tree ${TMGIT_TREE}"
     # concatenando o caminho do binário do git com os argumentos passados
     TMGIT="${TMGIT_GIT} ${TMGIT_ARGS}"
 
@@ -41,11 +41,15 @@ function fm_preflight() {
     # Verificar argumentos passados
     if [[ ${#} -lt 2 ]]
     then
-        LAND_ERRMSG="${#}"
-        LAND_MSG="Número de argumentos insuficiente, pois menor que 2: 1. git-dir; 2. worktree"
-        
-        # Encerrar programa enviando mensagens de erro e função chamadora
-        fm_land "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
+        if [[ ${#} -eq 1 ]]
+        then
+            TMGIT_DIR="${TMGIT_TREE}/.tmgit"
+        else
+            LAND_ERRMSG="${#}"
+            LAND_MSG="Número de argumentos insuficiente, pois menor que 1."
+            # Encerrar programa enviando mensagens de erro e função chamadora
+            fm_land "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
+        fi
     fi
 
 
@@ -67,7 +71,7 @@ function fm_preflight() {
             fm_land "${LAND_CALLER}" "${LAND_MSG}"
         fi
 fi
-    
+
     
 }
 

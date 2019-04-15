@@ -47,13 +47,12 @@ function fm_preflight() {
             TMGIT_DIR="${TMGIT_TREE}/.tmgit"
         else
             LAND_ERRLVL=1
-            LAND_ERRMSG="Numero de argumentos inferior a 1"
-            LAND_MSG="Verificando parametros"
+            LAND_ERRMSG="Uso: ${0} [diretorio a ser versionado] <diretorio de versionamento do tmgit> (opcional)"
+            LAND_MSG="Numero de parametros passados: ${#}"
             # Encerrar programa enviando mensagens de erro e função chamadora
             fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
         fi
     fi
-
 
     # Verificar se a variável TMGIT_GIT contém algum conteúdo válido
     LAND_MSG="Verificacao do executavel do git"
@@ -74,8 +73,8 @@ function fm_preflight() {
             # Encerrar programa enviando mensagens de erro e função chamadora
             fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}"
         fi
-fi
-  
+    fi
+
 }
 
 ## Preparar ambiente
@@ -83,7 +82,7 @@ function fm_climb() {
 
     LAND_CALLER="fm_preflight"
     LAND_ERRLVL="0"
-    
+
     # Tentando criar o diretorio onde a maquina do tempo seria versionada (o git dir)
     LAND_MSG="Verificacao do diretorio de controle do TMGIT em ${TMGIT_DIR}"
     if mkdir -p "${TMGIT_DIR}"

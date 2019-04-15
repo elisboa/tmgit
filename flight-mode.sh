@@ -103,7 +103,7 @@ function fm_climb() {
         else
             LAND_ERRLVL=6
             LAND_ERRMSG="Falha ao inicializar o diretorio ${TMGIT_DIR}"
-            #fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
+            fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
         fi
     
         if echo "*" > "${TMGIT_DIR}/.gitignore"

@@ -71,7 +71,7 @@ function fm_preflight() {
             LAND_ERRLVL=3
             LAND_ERRMSG="Arquivo ${TMGIT_GIT} não é executável"
             # Encerrar programa enviando mensagens de erro e função chamadora
-            fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}"
+            fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
         fi
     fi
 

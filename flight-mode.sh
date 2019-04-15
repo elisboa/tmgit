@@ -124,7 +124,7 @@ function fm_climb() {
             fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
         fi
 
-        git --git-dir "${TMGIT_DIR}" --work-tree  "${TMGIT_TREE}" status
+        git --git-dir "${TMGIT_DIR}" --work-tree "${TMGIT_TREE}" status
 
     else
         LAND_ERRLVL=4

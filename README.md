@@ -4,3 +4,13 @@
 Este projeto é baseado no [linux-time-machine](https://github.com/elisboa/linux-time-machine.sh), porém reescrito de maneira a deixar o código mais legível.
 
 Este projeto segue o guia de boas práticas [modo-avião](https://github.com/elisboa/modo-aviao), que ainda está em desenvolvimento.
+
+## Uso:
+```
+./main.sh [diretorio a ser versionado] <diretorio de versionamento do tmgit> (opcional)
+```
+
+Por exemplo: 
+1. `./main.sh /home/usuario` ─ ele armazenará o "gitdir" em /home/usuario/.tmgit
+2. `./main.sh /home/usuario /home/usuario/.git` ─ ele armazenará o "gitdir" em /home/usuario/.git
+

@@ -149,7 +149,6 @@ function fm_land() {
     # 4. Mensagem de erro (opcional)
     LAND_ERRMSG="${4}"
 
-
     # Exibir as mensagens abaixo APENAS se a variável contiver alguma coisa
     if [[ -n ${LAND_CALLER} ]]
     then

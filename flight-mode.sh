@@ -132,10 +132,35 @@ function fm_climb() {
 
 #
 ## Executar o código
-#function fm_fly() {
+function fm_fly() {
+
+    if verifica-mudancas
+    then
+        apaga-arquivos
+        versiona-mudancas
+        envia-remotos
+    fi
+}
 #
-#}
-#
+
+function verifica-mudancas() {
+
+
+}
+
+function apaga-arquivos() {
+
+
+}
+
+function versiona-mudancas () {
+
+}
+
+function envia-remotos () {
+
+
+}
 
 # Encerrar operações
 function fm_land() {

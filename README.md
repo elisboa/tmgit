@@ -1,9 +1,13 @@
 # tmgit
 ## Uma máquina do tempo que utiliza git e cron escrita em shell script
 
-Este projeto é baseado no [linux-time-machine](https://github.com/elisboa/linux-time-machine.sh), porém reescrito de maneira a deixar o código mais legível.
+#### Avisos
 
-Este projeto segue o guia de boas práticas [modo-avião](https://github.com/elisboa/modo-aviao), que ainda está em desenvolvimento.
+- Este projeto é baseado no [linux-time-machine](https://github.com/elisboa/linux-time-machine.sh), porém reescrito de maneira a deixar o código mais legível. 
+
+- Esta versão conta com mensagens em português, e preza mais pela legibilidade do código do que pela funcionalidade.
+
+- Este projeto segue o guia de boas práticas [modo-avião](https://github.com/elisboa/modo-aviao), que ainda está em desenvolvimento.
 
 ## Uso:
 ```

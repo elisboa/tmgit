@@ -75,6 +75,11 @@ function fm_preflight() {
         fi
     fi
 
+    LAND_ERRLVL=0
+    LAND_MSG="Git sendo executado como: ${TMGIT}"
+
+    fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}"
+
 }
 
 ## Preparar ambiente

@@ -9,10 +9,10 @@
 function main() {
 
     # Realizar verificações de ambiente
-    fm_preflight $@
+    fm_preflight "$@"
 
     # Preparar ambiente para a execução do programa
-    fm_climb $@
+    fm_climb "$@"
 
     # Realizar as operações que compreendem a lógica central do projeto
     # fm_fly $@
@@ -23,6 +23,6 @@ function main() {
 }
 
 # Carregar o arquivo que abstrai as funções o modo-avião
-source $(dirname ${0})/flight-mode.sh
+source "$(dirname ${0})/flight-mode.sh"
 
-main $@
+main "$@"

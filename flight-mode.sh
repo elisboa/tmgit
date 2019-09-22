@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Verificar ambiente
 function fm_preflight() {
 
@@ -8,19 +10,26 @@ function fm_preflight() {
     # O segundo argumento passado deve ser o diretório ".git" do repositório 
     TMGIT_DIR="${2}"
     # Pegando o caminho do binário do git
-	TMGIT_GIT="$(which git)"
+	TMGIT_GIT="$(command -v git)"
     # Montando os parâmetros passados para o GIT
     TMGIT_ARGS="--git-dir ${TMGIT_DIR} --work-tree ${TMGIT_TREE}"
     # concatenando o caminho do binário do git com os argumentos passados
     TMGIT="${TMGIT_GIT} ${TMGIT_ARGS}"
+    export TMGIT
 
     # variáveis utilizadas pelo git parametrizado (tmgit)
     # Check which branch we are
-	CUR_BRANCH="IT SHOULD BE A PATTERN LIKE YYYY.MM.DD"
-    TODAY_DATE="MUST BE YEAR.MONTH.DAY USING DATE COMMAND, LIKE YYYY.MM.DD"
-    COMMIT_DATE="SHOULD BE YEAR.MONTH.DAY.HOUR.MINUTE.SECOND USING DATE COMMAND"
+	CUR_BRANCH="DEVE ESTAR NO PADRAO DE DATA AAAA.MM.DD"
+    export CUR_BRANCH
+
+    TODAY_DATE="DEVE SER ANO.MES.DIA USANDO O COMANDO DATE, COMO EM AAAA.MM.DD"
+    export TODAY_DATE
+
+    COMMIT_DATE="DEVE SER ANO.MES.DIA.HORA.MINUTO.SEGUNDO USANDO O COMANDO DATE"
+    export COMMIT_DATE
     # Force current language to C, so all git messages are in default english
     LANG="C"
+    export LANG
 
     # Variáveis utilizadas no encerramento do programa (função fm_land)
     LAND_ERRLVL="0"
@@ -170,5 +179,5 @@ function fm_land() {
         echo "Mensagem de erro: ${LAND_ERRMSG}"
     fi
 
-    exit ${LAND_ERRLVL}
+    exit "${LAND_ERRLVL}"
 }

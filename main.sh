@@ -23,6 +23,7 @@ function main() {
 }
 
 # Carregar o arquivo que abstrai as funções o modo-avião
+# shellcheck source=/dev/null
 source "$(dirname ${0})/flight-mode.sh"
 
 main "$@"

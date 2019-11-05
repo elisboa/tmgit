@@ -1,32 +1,33 @@
+#!/bin/bash
 # Verificar ambiente
 function fm_preflight() {
 
     ## Inicializar variáveis
     # variáveis relacionadas ao binário git
     # O primerio argumento passado deve ser o diretório de trabalho onde os arquivos serão versionados (/home/user, por exemplo)
-    TMGIT_TREE="${1}"
+    export TMGIT_TREE="${1}"
     # O segundo argumento passado deve ser o diretório ".git" do repositório 
-    TMGIT_DIR="${2}"
+    export TMGIT_DIR="${2}"
     # Pegando o caminho do binário do git
-	TMGIT_GIT="$(which git)"
+	TMGIT_GIT="$(command which git)" && export TMGIT_GIT
     # Montando os parâmetros passados para o GIT
-    TMGIT_ARGS="--git-dir ${TMGIT_DIR} --work-tree ${TMGIT_TREE}"
+    export TMGIT_ARGS="--git-dir ${TMGIT_DIR} --work-tree ${TMGIT_TREE}"
     # concatenando o caminho do binário do git com os argumentos passados
-    TMGIT="${TMGIT_GIT} ${TMGIT_ARGS}"
+    export TMGIT="${TMGIT_GIT} ${TMGIT_ARGS}"
 
     # variáveis utilizadas pelo git parametrizado (tmgit)
     # Check which branch we are
-	CUR_BRANCH="IT SHOULD BE A PATTERN LIKE YYYY.MM.DD"
-    TODAY_DATE="MUST BE YEAR.MONTH.DAY USING DATE COMMAND, LIKE YYYY.MM.DD"
-    COMMIT_DATE="SHOULD BE YEAR.MONTH.DAY.HOUR.MINUTE.SECOND USING DATE COMMAND"
+	export CUR_BRANCH="IT SHOULD BE A PATTERN LIKE YYYY.MM.DD"
+    export TODAY_DATE="MUST BE YEAR.MONTH.DAY USING DATE COMMAND, LIKE YYYY.MM.DD"
+    export COMMIT_DATE="SHOULD BE YEAR.MONTH.DAY.HOUR.MINUTE.SECOND USING DATE COMMAND"
     # Force current language to C, so all git messages are in default english
-    LANG="C"
+    export LANG="C"
 
     # Variáveis utilizadas no encerramento do programa (função fm_land)
-    LAND_ERRLVL="0"
-    LAND_MSG="DEVE CONTER UMA MENSAGEM PERSONALIZADA"
-    LAND_ERRMSG="DEVE CONTER UMA MENSAGEM DE ERRO DO PROGRAMA EXECUTADO"
-    LAND_CALLER="NOME DA FUNÇÃO QUE CHAMA A FUNÇÃO DE ENCERRAMENTO"
+    export LAND_ERRLVL="0"
+    export LAND_MSG="DEVE CONTER UMA MENSAGEM PERSONALIZADA"
+    export LAND_ERRMSG="DEVE CONTER UMA MENSAGEM DE ERRO DO PROGRAMA EXECUTADO"
+    export LAND_CALLER="NOME DA FUNÇÃO QUE CHAMA A FUNÇÃO DE ENCERRAMENTO"
 
  
 #    debug
@@ -170,5 +171,5 @@ function fm_land() {
         echo "Mensagem de erro: ${LAND_ERRMSG}"
     fi
 
-    exit ${LAND_ERRLVL}
+    exit "${LAND_ERRLVL}"
 }

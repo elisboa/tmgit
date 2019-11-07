@@ -17,7 +17,9 @@ Por exemplo:
 
 #### Avisos
 
-- Este projeto é baseado no [linux-time-machine](https://github.com/elisboa/linux-time-machine.sh), porém reescrito de maneira a deixar o código mais legível. 
+- Este projeto ainda não está funcional! Utilize o [linux-time-machine](https://github.com/elisboa/linux-time-machine.sh), que já está funcional e conta inclusive com backup para um repositório remoto, caso você o adicione.
+
+- Este projeto é baseado no [linux-time-machine](https://github.com/elisboa/linux-time-machine.sh), porém está sendo reescrito de maneira a deixar o código mais legível.
 
 - Esta versão conta com mensagens em português, e preza mais pela legibilidade do código do que pela funcionalidade.
 

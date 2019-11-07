@@ -1,4 +1,8 @@
 #!/bin/bash
+<<<<<<< HEAD
+=======
+
+>>>>>>> 20dc789cc467e1f886ee9c42f488b56a233bef04
 # Verificar ambiente
 function fm_preflight() {
 
@@ -9,10 +13,15 @@ function fm_preflight() {
     # O segundo argumento passado deve ser o diretório ".git" do repositório 
     export TMGIT_DIR="${2}"
     # Pegando o caminho do binário do git
+<<<<<<< HEAD
 	TMGIT_GIT="$(command which git)" && export TMGIT_GIT
+=======
+	TMGIT_GIT="$(command -v git)"
+>>>>>>> 20dc789cc467e1f886ee9c42f488b56a233bef04
     # Montando os parâmetros passados para o GIT
     export TMGIT_ARGS="--git-dir ${TMGIT_DIR} --work-tree ${TMGIT_TREE}"
     # concatenando o caminho do binário do git com os argumentos passados
+<<<<<<< HEAD
     export TMGIT="${TMGIT_GIT} ${TMGIT_ARGS}"
 
     # variáveis utilizadas pelo git parametrizado (tmgit)
@@ -22,6 +31,24 @@ function fm_preflight() {
     export COMMIT_DATE="SHOULD BE YEAR.MONTH.DAY.HOUR.MINUTE.SECOND USING DATE COMMAND"
     # Force current language to C, so all git messages are in default english
     export LANG="C"
+=======
+    TMGIT="${TMGIT_GIT} ${TMGIT_ARGS}"
+    export TMGIT
+
+    # variáveis utilizadas pelo git parametrizado (tmgit)
+    # Check which branch we are
+	CUR_BRANCH="DEVE ESTAR NO PADRAO DE DATA AAAA.MM.DD"
+    export CUR_BRANCH
+
+    TODAY_DATE="DEVE SER ANO.MES.DIA USANDO O COMANDO DATE, COMO EM AAAA.MM.DD"
+    export TODAY_DATE
+
+    COMMIT_DATE="DEVE SER ANO.MES.DIA.HORA.MINUTO.SEGUNDO USANDO O COMANDO DATE"
+    export COMMIT_DATE
+    # Force current language to C, so all git messages are in default english
+    LANG="C"
+    export LANG
+>>>>>>> 20dc789cc467e1f886ee9c42f488b56a233bef04
 
     # Variáveis utilizadas no encerramento do programa (função fm_land)
     export LAND_ERRLVL="0"

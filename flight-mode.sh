@@ -134,10 +134,17 @@ function fm_climb() {
 ## Executar o código
 function fm_fly() {
 
+    LAND_CALLER="fm_fly"
+
+    # Executar a verificação de mudanças
     if verifica-mudancas
+    # Se der certo...
     then
+        # Apaga do repositorio os arquivos já removidos do disco
         apaga-arquivos
+        # Realiza o commit dos arquivos alterados
         versiona-mudancas
+        # Envia as alterações para os repositórios remotos configurados
         envia-remotos
     fi
 }
@@ -145,6 +152,11 @@ function fm_fly() {
 
 function verifica-mudancas() {
 
+    LAND_CALLER="verifica_mudancas"
+    LAND_MSG="Verificacao de mudancas em ${TMGIT_DIR}"
+    
+
+    if ${TMGIT} status | grep 'working tree clean'
 
 }
 

@@ -117,18 +117,18 @@ function fm_climb() {
 
     # Tentando criar o diretorio onde a maquina do tempo seria versionada (o git dir)
     LAND_MSG="Verificacao do diretorio de controle do TMGIT em ${TMGIT_DIR}"
-    if mkdir -p "${TMGIT_DIR}"
+    if [[ -d "${TMGIT_TREE}" ]]
     then
 
-        if [[ -e "${TMGIT_TREE}/.git" ]]
-        then
-            LAND_ERRLVL=5
-            LAND_ERRMSG="Arquivo .git em ${TMGIT_TREE} existente"
-            #fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
-        fi
-
-        cd "${TMGIT_TREE}" &&\
-        if git init --separate-git-dir "${TMGIT_DIR}"
+        #if [[ -e "${TMGIT_TREE}/.git" ]]
+        #then
+        #    LAND_ERRLVL=5
+        #    LAND_ERRMSG="Arquivo .git em ${TMGIT_TREE} existente"
+        #    fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
+        #fi
+        
+        LAND_MSG="Inicialização do diretório ${TMGIT_TREE} tendo como diretório de controle o ${TMGIT_DIR}"
+        if git init "${TMGIT_TREE}" --separate-git-dir "${TMGIT_DIR}"
         then
             LAND_ERRMSG="Diretorio ${TMGIT_DIR} inicializado com sucesso"
         else
@@ -136,14 +136,22 @@ function fm_climb() {
             LAND_ERRMSG="Falha ao inicializar o diretorio ${TMGIT_DIR}"
             fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
         fi
-    
-        if echo "*" > "${TMGIT_DIR}/.gitignore"
+
+        LAND_MSG="Adicionando arquivo .gitignore"
+        if [[ -e "${TMGIT_TREE}/.gitignore" ]]
         then
-            LAND_ERRMSG="Adicionado arquivo .gitignore com sucesso"
+            LAND_ERRMSG="Arquivo .gitignore já encontrando"
+            cat "${TMGIT_TREE}/.gitignore"
         else
-            LAND_ERRLVL=7
-            LAND_ERRMSG="Falha ao adcionar arquivo .gitignore"
-            #fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
+            if echo "*" > "${TMGIT_TREE}/.gitignore"
+            then
+                LAND_ERRMSG="Adicionado arquivo .gitignore com sucesso"
+            else
+                LAND_ERRLVL=7
+                LAND_ERRMSG="Falha ao adicionar arquivo .gitignore"
+                fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
+            fi
+
         fi
 
         # Tudo bem falhar nos comandos acima. Mas o git status não pode falhar!
@@ -156,7 +164,7 @@ function fm_climb() {
         fi
     else
         LAND_ERRLVL=4
-        LAND_ERRMSG="Erro ao criar ${TMGIT_DIR}"
+        LAND_ERRMSG="Falha ao acessar diretório ${TMGIT_DIR}"
         fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
     fi
 

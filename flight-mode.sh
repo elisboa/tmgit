@@ -1,3 +1,35 @@
+# Encerrar operações
+function fm_land() {
+    # Esperados 4 argumentos:
+    # 1. Número do código de erro (se vazio ou 0, sair com sucesso)
+    LAND_ERRLVL="${1}"
+    # 2. Função chamadora
+    LAND_CALLER="${2}"
+    # 3. Mensagem de encerramento
+    LAND_MSG="${3}"
+    # 4. Mensagem de erro (opcional)
+    LAND_ERRMSG="${4}"
+
+
+    # Exibir as mensagens abaixo APENAS se a variável contiver alguma coisa
+    if [[ -n ${LAND_CALLER} ]]
+    then
+        echo "Iniciando aterrissagem chamada por ${LAND_CALLER}"
+    fi
+
+    if [[ -n ${LAND_MSG} ]]
+    then
+        echo "Encerrando programa: ${LAND_MSG}"
+    fi
+
+    if [[ -n ${LAND_ERRMSG} ]]
+    then
+        echo "Mensagem de erro: ${LAND_ERRMSG}"
+    fi
+
+    exit ${LAND_ERRLVL}
+}
+
 # Verificar ambiente
 function fm_preflight() {
 
@@ -150,58 +182,27 @@ function fm_fly() {
 }
 #
 
-function verifica-mudancas() {
+#function verifica-mudancas() {
+#
+#    LAND_CALLER="verifica_mudancas"
+#    LAND_MSG="Verificacao de mudancas em ${TMGIT_DIR}"
+#    
+#
+#    if ${TMGIT} status | grep 'working tree clean'
+#
+#}
+#
+#function apaga-arquivos() {
+#
+#
+#}
+#
+#function versiona-mudancas () {
+#
+#}
+#
+#function envia-remotos () {
+#
+#
+#}
 
-    LAND_CALLER="verifica_mudancas"
-    LAND_MSG="Verificacao de mudancas em ${TMGIT_DIR}"
-    
-
-    if ${TMGIT} status | grep 'working tree clean'
-
-}
-
-function apaga-arquivos() {
-
-
-}
-
-function versiona-mudancas () {
-
-}
-
-function envia-remotos () {
-
-
-}
-
-# Encerrar operações
-function fm_land() {
-    # Esperados 4 argumentos:
-    # 1. Número do código de erro (se vazio ou 0, sair com sucesso)
-    LAND_ERRLVL="${1}"
-    # 2. Função chamadora
-    LAND_CALLER="${2}"
-    # 3. Mensagem de encerramento
-    LAND_MSG="${3}"
-    # 4. Mensagem de erro (opcional)
-    LAND_ERRMSG="${4}"
-
-
-    # Exibir as mensagens abaixo APENAS se a variável contiver alguma coisa
-    if [[ -n ${LAND_CALLER} ]]
-    then
-        echo "Iniciando aterrissagem chamada por ${LAND_CALLER}"
-    fi
-
-    if [[ -n ${LAND_MSG} ]]
-    then
-        echo "Encerrando programa: ${LAND_MSG}"
-    fi
-
-    if [[ -n ${LAND_ERRMSG} ]]
-    then
-        echo "Mensagem de erro: ${LAND_ERRMSG}"
-    fi
-
-    exit ${LAND_ERRLVL}
-}

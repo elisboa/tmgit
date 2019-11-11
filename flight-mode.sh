@@ -30,7 +30,6 @@ function fm_land() {
     exit ${LAND_ERRLVL}
 }
 
->>>>>>> feature/estruturacao
 # Verificar ambiente
 function fm_preflight() {
 

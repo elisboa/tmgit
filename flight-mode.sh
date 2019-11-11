@@ -1,8 +1,36 @@
-#!/bin/bash
-<<<<<<< HEAD
-=======
+# Encerrar operações
+function fm_land() {
+    # Esperados 4 argumentos:
+    # 1. Número do código de erro (se vazio ou 0, sair com sucesso)
+    LAND_ERRLVL="${1}"
+    # 2. Função chamadora
+    LAND_CALLER="${2}"
+    # 3. Mensagem de encerramento
+    LAND_MSG="${3}"
+    # 4. Mensagem de erro (opcional)
+    LAND_ERRMSG="${4}"
 
->>>>>>> 20dc789cc467e1f886ee9c42f488b56a233bef04
+
+    # Exibir as mensagens abaixo APENAS se a variável contiver alguma coisa
+    if [[ -n ${LAND_CALLER} ]]
+    then
+        echo "Iniciando aterrissagem chamada por ${LAND_CALLER}"
+    fi
+
+    if [[ -n ${LAND_MSG} ]]
+    then
+        echo "Encerrando programa: ${LAND_MSG}"
+    fi
+
+    if [[ -n ${LAND_ERRMSG} ]]
+    then
+        echo "Mensagem de erro: ${LAND_ERRMSG}"
+    fi
+
+    exit ${LAND_ERRLVL}
+}
+
+>>>>>>> feature/estruturacao
 # Verificar ambiente
 function fm_preflight() {
 
@@ -13,25 +41,11 @@ function fm_preflight() {
     # O segundo argumento passado deve ser o diretório ".git" do repositório 
     export TMGIT_DIR="${2}"
     # Pegando o caminho do binário do git
-<<<<<<< HEAD
-	TMGIT_GIT="$(command which git)" && export TMGIT_GIT
-=======
 	TMGIT_GIT="$(command -v git)"
->>>>>>> 20dc789cc467e1f886ee9c42f488b56a233bef04
+    export TMGIT_GIT
     # Montando os parâmetros passados para o GIT
     export TMGIT_ARGS="--git-dir ${TMGIT_DIR} --work-tree ${TMGIT_TREE}"
     # concatenando o caminho do binário do git com os argumentos passados
-<<<<<<< HEAD
-    export TMGIT="${TMGIT_GIT} ${TMGIT_ARGS}"
-
-    # variáveis utilizadas pelo git parametrizado (tmgit)
-    # Check which branch we are
-	export CUR_BRANCH="IT SHOULD BE A PATTERN LIKE YYYY.MM.DD"
-    export TODAY_DATE="MUST BE YEAR.MONTH.DAY USING DATE COMMAND, LIKE YYYY.MM.DD"
-    export COMMIT_DATE="SHOULD BE YEAR.MONTH.DAY.HOUR.MINUTE.SECOND USING DATE COMMAND"
-    # Force current language to C, so all git messages are in default english
-    export LANG="C"
-=======
     TMGIT="${TMGIT_GIT} ${TMGIT_ARGS}"
     export TMGIT
 
@@ -48,7 +62,6 @@ function fm_preflight() {
     # Force current language to C, so all git messages are in default english
     LANG="C"
     export LANG
->>>>>>> 20dc789cc467e1f886ee9c42f488b56a233bef04
 
     # Variáveis utilizadas no encerramento do programa (função fm_land)
     export LAND_ERRLVL="0"
@@ -118,18 +131,18 @@ function fm_climb() {
 
     # Tentando criar o diretorio onde a maquina do tempo seria versionada (o git dir)
     LAND_MSG="Verificacao do diretorio de controle do TMGIT em ${TMGIT_DIR}"
-    if mkdir -p "${TMGIT_DIR}"
+    if [[ -d "${TMGIT_TREE}" ]]
     then
 
-        if [[ -e "${TMGIT_TREE}/.git" ]]
-        then
-            LAND_ERRLVL=5
-            LAND_ERRMSG="Arquivo .git em ${TMGIT_TREE} existente"
-            #fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
-        fi
-
-        cd "${TMGIT_TREE}" &&\
-        if git init --separate-git-dir "${TMGIT_DIR}"
+        #if [[ -e "${TMGIT_TREE}/.git" ]]
+        #then
+        #    LAND_ERRLVL=5
+        #    LAND_ERRMSG="Arquivo .git em ${TMGIT_TREE} existente"
+        #    fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
+        #fi
+        
+        LAND_MSG="Inicialização do diretório ${TMGIT_TREE} tendo como diretório de controle o ${TMGIT_DIR}"
+        if git init "${TMGIT_TREE}" --separate-git-dir "${TMGIT_DIR}"
         then
             LAND_ERRMSG="Diretorio ${TMGIT_DIR} inicializado com sucesso"
         else
@@ -137,14 +150,22 @@ function fm_climb() {
             LAND_ERRMSG="Falha ao inicializar o diretorio ${TMGIT_DIR}"
             fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
         fi
-    
-        if echo "*" > "${TMGIT_DIR}/.gitignore"
+
+        LAND_MSG="Adicionando arquivo .gitignore"
+        if [[ -e "${TMGIT_TREE}/.gitignore" ]]
         then
-            LAND_ERRMSG="Adicionado arquivo .gitignore com sucesso"
+            LAND_ERRMSG="Arquivo .gitignore já encontrando"
+            cat "${TMGIT_TREE}/.gitignore"
         else
-            LAND_ERRLVL=7
-            LAND_ERRMSG="Falha ao adcionar arquivo .gitignore"
-            #fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
+            if echo "*" > "${TMGIT_TREE}/.gitignore"
+            then
+                LAND_ERRMSG="Adicionado arquivo .gitignore com sucesso"
+            else
+                LAND_ERRLVL=7
+                LAND_ERRMSG="Falha ao adicionar arquivo .gitignore"
+                fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
+            fi
+
         fi
 
         # Tudo bem falhar nos comandos acima. Mas o git status não pode falhar!
@@ -157,7 +178,7 @@ function fm_climb() {
         fi
     else
         LAND_ERRLVL=4
-        LAND_ERRMSG="Erro ao criar ${TMGIT_DIR}"
+        LAND_ERRMSG="Falha ao acessar diretório ${TMGIT_DIR}"
         fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
     fi
 
@@ -165,38 +186,44 @@ function fm_climb() {
 
 #
 ## Executar o código
-#function fm_fly() {
+function fm_fly() {
+
+    LAND_CALLER="fm_fly"
+
+    # Executar a verificação de mudanças
+    if verifica-mudancas
+    # Se der certo...
+    then
+        # Apaga do repositorio os arquivos já removidos do disco
+        apaga-arquivos
+        # Realiza o commit dos arquivos alterados
+        versiona-mudancas
+        # Envia as alterações para os repositórios remotos configurados
+        envia-remotos
+    fi
+}
+#
+
+#function verifica-mudancas() {
+#
+#    LAND_CALLER="verifica_mudancas"
+#    LAND_MSG="Verificacao de mudancas em ${TMGIT_DIR}"
+#    
+#
+#    if ${TMGIT} status | grep 'working tree clean'
 #
 #}
 #
-
-# Encerrar operações
-function fm_land() {
-    # Esperados 4 argumentos:
-    # 1. Número do código de erro (se vazio ou 0, sair com sucesso)
-    LAND_ERRLVL="${1}"
-    # 2. Função chamadora
-    LAND_CALLER="${2}"
-    # 3. Mensagem de encerramento
-    LAND_MSG="${3}"
-    # 4. Mensagem de erro (opcional)
-    LAND_ERRMSG="${4}"
-
-    # Exibir as mensagens abaixo APENAS se a variável contiver alguma coisa
-    if [[ -n ${LAND_CALLER} ]]
-    then
-        echo "Iniciando aterrissagem chamada por ${LAND_CALLER}"
-    fi
-
-    if [[ -n ${LAND_MSG} ]]
-    then
-        echo "Encerrando programa: ${LAND_MSG}"
-    fi
-
-    if [[ -n ${LAND_ERRMSG} ]]
-    then
-        echo "Mensagem de erro: ${LAND_ERRMSG}"
-    fi
-
-    exit "${LAND_ERRLVL}"
-}
+#function apaga-arquivos() {
+#
+#
+#}
+#
+#function versiona-mudancas () {
+#
+#}
+#
+#function envia-remotos () {
+#
+#
+#}

@@ -118,6 +118,8 @@ function fm_preflight() {
     LAND_ERRLVL=0
     LAND_MSG="Git sendo executado como: ${TMGIT}"
 
+    fm_climb "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}"
+    
     fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}"
 
 }

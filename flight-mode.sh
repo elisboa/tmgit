@@ -27,6 +27,13 @@ function fm_land() {
         echo "Mensagem de erro: ${LAND_ERRMSG}"
     fi
 
+    if [[ -n ${LAND_ERRLVL} ]]
+    then
+        echo "Codigo de erro: ${LAND_ERRLVL}"
+    fi
+
+    
+
     exit ${LAND_ERRLVL}
 }
 

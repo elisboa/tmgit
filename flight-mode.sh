@@ -93,7 +93,7 @@ function fm_preflight() {
         then
             TMGIT_DIR="${TMGIT_TREE}/.tmgit"
         else
-            LAND_ERRLVL=1
+            let LAND_ERRLVL+=1
             LAND_ERRMSG="Uso: ${0} [diretorio a ser versionado] <diretorio de versionamento do tmgit> (opcional)"
             LAND_MSG="Numero de parametros passados: ${#}"
             # Encerrar programa enviando mensagens de erro e função chamadora
@@ -105,7 +105,7 @@ function fm_preflight() {
     LAND_MSG="Verificacao do executavel do git"
     if [[ -z "${TMGIT_GIT}" ]]
     then
-        LAND_ERRLVL=2
+        let LAND_ERRLVL+=1
         LAND_ERRMSG="Arquivo executável do git não encontrado"
 
         # Encerrar programa enviando mensagens de erro e função chamadora
@@ -115,7 +115,7 @@ function fm_preflight() {
         # Verificar se TMGIT_GIT aponta para um executável válido
         if [[ ! -x "${TMGIT_GIT}" ]]
         then
-            LAND_ERRLVL=3
+            let LAND_ERRLVL+=1
             LAND_ERRMSG="Arquivo ${TMGIT_GIT} não é executável"
             # Encerrar programa enviando mensagens de erro e função chamadora
             fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
@@ -170,7 +170,7 @@ function fm_climb() {
             then
                 LAND_ERRMSG="Adicionado arquivo .gitignore com sucesso"
             else
-                LAND_ERRLVL=7
+                let LAND_ERRLVL+=1
                 LAND_ERRMSG="Falha ao adicionar arquivo .gitignore"
                 fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
             fi

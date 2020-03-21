@@ -127,8 +127,9 @@ function fm_preflight() {
 ## Preparar ambiente
 function fm_climb() {
 
-    LAND_CALLER="fm_preflight"
-    LAND_ERRLVL="0"
+    LAND_ERRLVL="$1"
+    LAND_CALLER="$2"
+    LAND_MSG="$3"
 
     # Tentando criar o diretorio onde a maquina do tempo seria versionada (o git dir)
     LAND_MSG="Verificacao do diretorio de controle do TMGIT em ${TMGIT_DIR}"

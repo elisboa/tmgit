@@ -192,9 +192,9 @@ function fm_climb() {
             fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
         fi
     else
-        LAND_ERRLVL=4
+        let LAND_ERRLVL+=1
         LAND_ERRMSG="Falha ao acessar diretório ${TMGIT_DIR}"
-        fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
+        fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
     fi
 
 }

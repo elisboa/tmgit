@@ -157,9 +157,16 @@ function fm_climb() {
         else
             if [[ -e "${TMGIT_TREE}/.git" ]]  && grep ^gitdir "${TMGIT_TREE}/.git"
             then
-                LAND_ERRMSG="Diretorio referenciado no arquivo ${TMGIT_TREE}/.git porem inexistente no disco"
                 let LAND_ERRLVL+=1
-                fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"    
+                LAND_ERRMSG="Diretorio referenciado no arquivo ${TMGIT_TREE}/.git porem inexistente no disco"
+                fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
+            else
+                if [[ -e "${TMGIT_TREE}"/.git ]]
+                then
+                    let LAND_ERRLVL+=1
+                    LAND_ERRMSG="Entrada para o diretorio ${TMGIT_DIR} inexistente no arquivo ${TMGIT_TREE}/.git"
+                    fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
+                fi
             fi
             let LAND_ERRLVL+=1
             LAND_ERRMSG="Falha ao inicializar o diretorio ${TMGIT_DIR}"

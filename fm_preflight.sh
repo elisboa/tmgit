@@ -39,19 +39,9 @@ function set-vars() {
 
 }
 
-# Verificar ambiente
-function fm_preflight() {
+function check-args () {
 
-    set-vars
-
-#    debug
-#    shift
-#    echo "Mostrando todos os argumentos passados"
-#    echo "$@"
-#    echo "Número de argumentos passados"
-#    echo "$#"
-
-    LAND_CALLER="fm_preflight"
+    LAND_CALLER="check-args"
 
     ## Iniciar verificações de ambiente
     # Verificar argumentos passados
@@ -95,5 +85,21 @@ function fm_preflight() {
 
     fm_climb "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
     fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
+}
+
+function fm_preflight() {
+
+    set-vars
+
+#    debug
+#    shift
+#    echo "Mostrando todos os argumentos passados"
+#    echo "$@"
+#    echo "Número de argumentos passados"
+#    echo "$#"
+
+    LAND_CALLER="fm_preflight"
+
+    check-args
 
 }

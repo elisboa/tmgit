@@ -27,5 +27,8 @@ function main() {
 # shellcheck source=/dev/null
 
 source "$(dirname ${0})/fm_preflight.sh"
+source "$(dirname ${0})/fm_climb.sh"
+source "$(dirname ${0})/fm_fly.sh"
+source "$(dirname ${0})/fm_land.sh"
 
 main "$@"

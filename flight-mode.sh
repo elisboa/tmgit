@@ -155,7 +155,7 @@ function fm_climb() {
         then
             LAND_ERRMSG="Diretorio ${TMGIT_DIR} inicializado com sucesso"
         else
-            if [[ -e "${TMGIT_TREE}/.git" ]]  && grep ^gitdir "${TMGIT_TREE}/.git 2>&1 > /dev/null"
+            if [[ -e "${TMGIT_TREE}/.git" ]]  && grep ^gitdir "${TMGIT_TREE}/.git" 2>&1 > /dev/null
             then
                 let LAND_ERRLVL+=1
                 LAND_ERRMSG="Diretorio referenciado no arquivo ${TMGIT_TREE}/.git porem inexistente no disco"
@@ -192,7 +192,7 @@ function fm_climb() {
 
         # Tudo bem falhar nos comandos acima. Mas o git status não pode falhar!
         # Se ele falhar, aí sim a gente chama a função fm_land
-        if git --git-dir "${TMGIT_DIR}" --work-tree "${TMGIT_TREE}" status
+        if git --git-dir "${TMGIT_DIR}" --work-tree "${TMGIT_TREE}" status 2>&1 > /dev/null
         then
             echo Tudo bem in the rain
         else

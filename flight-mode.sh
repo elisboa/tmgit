@@ -47,7 +47,7 @@ function fm_preflight() {
     # O segundo argumento passado deve ser o diretório ".git" do repositório 
     export TMGIT_DIR="${2}"
     # Pegando o caminho do binário do git
-	TMGIT_GIT="$(command -v git)"
+	TMGIT_GIT="$(command -v git 2> /dev/null)"
     export TMGIT_GIT
     # Montando os parâmetros passados para o GIT
     export TMGIT_ARGS="--git-dir ${TMGIT_DIR} --work-tree ${TMGIT_TREE}"

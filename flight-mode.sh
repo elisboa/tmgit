@@ -188,12 +188,15 @@ function fm_climb() {
 
         fi
 
+        LAND_MSG="Verificando estado do repositorio"
         # Tudo bem falhar nos comandos acima. Mas o git status não pode falhar!
         # Se ele falhar, aí sim a gente chama a função fm_land
         if git --git-dir "${TMGIT_DIR}" --work-tree "${TMGIT_TREE}" status 2>&1 > /dev/null
         then
-            echo Tudo bem in the rain
+            LAND_ERRMSG="Repositorio OK"
         else
+            let LAND_ERRLVL+=1
+            LAND_ERRMSG="Falha ao verificar estado do repositorio"
             fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
         fi
     else

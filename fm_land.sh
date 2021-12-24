@@ -32,7 +32,5 @@ function fm_land() {
         echo "Codigo de erro: ${LAND_ERRLVL}"
     fi
 
-    
-
     exit ${LAND_ERRLVL}
 }

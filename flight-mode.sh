@@ -173,11 +173,11 @@ function fm_climb() {
         fi
 
         LAND_MSG="Verificando arquivo .gitignore"
-        if [[ -e "${TMGIT_TREE}/.gitignore" ]]
+        if [[ -e "${TMGIT_TREE}/.gitignore" ]] && [[ ! -d "${TMGIT_TREE}/.gitignore" ]]
         then
             LAND_ERRMSG="Arquivo .gitignore já encontrado."
         else
-            if echo "*" > "${TMGIT_TREE}/.gitignore"
+            if [[ ! -d "${TMGIT_TREE}/.gitignore" ]] && echo "*" > "${TMGIT_TREE}/.gitignore" 2> /dev/null > /dev/null 
             then
                 LAND_ERRMSG="Adicionado arquivo .gitignore com sucesso"
             else

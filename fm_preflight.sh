@@ -1,5 +1,4 @@
-# Verificar ambiente
-function fm_preflight() {
+function set-vars() {
 
     ## Inicializar variáveis
     # variáveis relacionadas ao binário git
@@ -36,7 +35,15 @@ function fm_preflight() {
     export LAND_ERRMSG="DEVE CONTER UMA MENSAGEM DE ERRO DO PROGRAMA EXECUTADO"
     export LAND_CALLER="NOME DA FUNÇÃO QUE CHAMA A FUNÇÃO DE ENCERRAMENTO"
 
- 
+     
+
+}
+
+# Verificar ambiente
+function fm_preflight() {
+
+    set-vars
+
 #    debug
 #    shift
 #    echo "Mostrando todos os argumentos passados"

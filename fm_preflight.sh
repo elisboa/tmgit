@@ -33,12 +33,12 @@ function set-vars() {
     export LAND_ERRLVL="0"
     export LAND_MSG="DEVE CONTER UMA MENSAGEM PERSONALIZADA"
     export LAND_ERRMSG="DEVE CONTER UMA MENSAGEM DE ERRO DO PROGRAMA EXECUTADO"
-    export LAND_CALLER="NOME DA FUNÇÃO QUE CHAMA A FUNÇÃO DE ENCERRAMENTO"
+    export LAND_CALLER="" # "NOME DA FUNÇÃO QUE CHAMA A FUNÇÃO DE ENCERRAMENTO"
 }
 
 function check-args () {
 
-    LAND_CALLER="check-args"
+    LAND_CALLER="${LAND_CALLER} -> check-args"
 
     ## Iniciar verificações de ambiente
     # Verificar argumentos passados
@@ -86,7 +86,7 @@ function check-args () {
 
 function fm_preflight() {
 
-    set-vars
+    set-vars "$@"
 
 #    debug
 #    shift
@@ -97,5 +97,5 @@ function fm_preflight() {
 
     LAND_CALLER="fm_preflight"
 
-    check-args
+    check-args "$@"
 }

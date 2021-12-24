@@ -125,9 +125,8 @@ function fm_preflight() {
     LAND_ERRLVL=0
     LAND_MSG="Git sendo executado como: ${TMGIT}"
 
-    fm_climb "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}"
-    
-    fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}"
+    fm_climb "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
+    fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
 
 }
 
@@ -159,18 +158,18 @@ function fm_climb() {
             then
                 let LAND_ERRLVL+=1
                 LAND_ERRMSG="Diretorio referenciado no arquivo ${TMGIT_TREE}/.git porem inexistente no disco"
-                fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
+                fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
             else
                 if [[ -e "${TMGIT_TREE}"/.git ]]
                 then
                     let LAND_ERRLVL+=1
                     LAND_ERRMSG="Entrada para o diretorio ${TMGIT_DIR} inexistente no arquivo ${TMGIT_TREE}/.git"
-                    fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
+                    fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
                 fi
             fi
             let LAND_ERRLVL+=1
             LAND_ERRMSG="Falha ao inicializar o diretorio ${TMGIT_DIR}"
-            fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
+            fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
         fi
 
         LAND_MSG="Verificando arquivo .gitignore"
@@ -184,7 +183,7 @@ function fm_climb() {
             else
                 let LAND_ERRLVL+=1
                 LAND_ERRMSG="Falha ao adicionar arquivo .gitignore"
-                fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
+                fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
             fi
 
         fi
@@ -195,12 +194,12 @@ function fm_climb() {
         then
             echo Tudo bem in the rain
         else
-            fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
+            fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
         fi
     else
         let LAND_ERRLVL+=1
         LAND_ERRMSG="Falha ao acessar diretório ${TMGIT_DIR}"
-        fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
+        fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
     fi
 
 }

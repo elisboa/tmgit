@@ -155,7 +155,7 @@ function fm_climb() {
         then
             LAND_ERRMSG="Diretorio ${TMGIT_DIR} inicializado com sucesso"
         else
-            if [[ -e "${TMGIT_TREE}/.git" ]]  && grep ^gitdir "${TMGIT_TREE}/.git"
+            if [[ -e "${TMGIT_TREE}/.git" ]]  && grep ^gitdir "${TMGIT_TREE}/.git 2>&1 > /dev/null"
             then
                 let LAND_ERRLVL+=1
                 LAND_ERRMSG="Diretorio referenciado no arquivo ${TMGIT_TREE}/.git porem inexistente no disco"

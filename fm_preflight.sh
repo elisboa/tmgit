@@ -34,9 +34,6 @@ function set-vars() {
     export LAND_MSG="DEVE CONTER UMA MENSAGEM PERSONALIZADA"
     export LAND_ERRMSG="DEVE CONTER UMA MENSAGEM DE ERRO DO PROGRAMA EXECUTADO"
     export LAND_CALLER="NOME DA FUNÇÃO QUE CHAMA A FUNÇÃO DE ENCERRAMENTO"
-
-     
-
 }
 
 function check-args () {
@@ -101,5 +98,4 @@ function fm_preflight() {
     LAND_CALLER="fm_preflight"
 
     check-args
-
 }

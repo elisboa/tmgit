@@ -173,7 +173,7 @@ function fm_climb() {
             fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}" "${LAND_ERRLVL}"
         fi
 
-        LAND_MSG="Adicionando arquivo .gitignore"
+        LAND_MSG="Verificando arquivo .gitignore"
         if [[ -e "${TMGIT_TREE}/.gitignore" ]]
         then
             LAND_ERRMSG="Arquivo .gitignore já encontrado."

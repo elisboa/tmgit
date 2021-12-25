@@ -80,8 +80,6 @@ function check-args () {
     LAND_ERRLVL=0
     LAND_MSG="Git sendo executado como: ${TMGIT}"
 
-    fm_climb "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
-    fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
 }
 
 function fm_preflight() {

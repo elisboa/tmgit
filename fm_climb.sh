@@ -3,11 +3,11 @@ function init-repo() {
     LAND_CALLER="${LAND_CALLER} -> init-repo"
 
     LAND_MSG="Inicialização do diretório ${TMGIT_TREE} tendo como diretório de controle o ${TMGIT_DIR}"
-    if git init "${TMGIT_TREE}" --separate-git-dir "${TMGIT_DIR}" 2>&1 > /dev/null
+    if git init "${TMGIT_TREE}" --separate-git-dir "${TMGIT_DIR}" > /dev/null 2>&1
     then
         LAND_ERRMSG="Diretorio ${TMGIT_DIR} inicializado com sucesso"
     else
-        if [[ -e "${TMGIT_TREE}/.git" ]]  && grep ^gitdir "${TMGIT_TREE}/.git" 2>&1 > /dev/null
+        if [[ -e "${TMGIT_TREE}/.git" ]]  && grep ^gitdir "${TMGIT_TREE}/.git" > /dev/null 2>&1
         then
             let LAND_ERRLVL+=1
             LAND_ERRMSG="Diretorio referenciado no arquivo ${TMGIT_TREE}/.git porem inexistente no disco"
@@ -60,7 +60,7 @@ function check-status() {
     LAND_MSG="Verificando estado do repositorio"
     # Tudo bem falhar nos comandos acima. Mas o git status não pode falhar!
     # Se ele falhar, aí sim a gente chama a função fm_land
-    if git --git-dir "${TMGIT_DIR}" --work-tree "${TMGIT_TREE}" status 2>&1 > /dev/null
+    if ${TMGIT} status > /dev/null 2>&1
     then
         LAND_ERRMSG="Repositorio OK"
     else
@@ -89,6 +89,37 @@ function create-repo() {
     fi
 }
 
+function create-branch() {
+    
+    LAND_CALLER="${LAND_CALLER} -> create-branch"
+
+    LAND_MSG="Criacao da branch ${BRANCH_NAME}"
+    if ${TMGIT} checkout -b "${BRANCH_NAME}" > /dev/null 2>&1 
+    then
+        LAND_ERRMSG="Branch ${BRANCH_NAME} criada com sucesso"
+        ${TMGIT} commit --allow-empty -m":tada: Criada nova branch ${BRANCH_NAME}" > /dev/null 2>&1
+    else
+        let LAND_ERRLVL+=1
+        LAND_ERRMSG="Não foi possível criar a branch ${BRANCH_NAME}"
+        fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
+    fi
+}
+
+function check-branch() {
+
+    LAND_CALLER="${LAND_CALLER} -> check-branch"
+
+    BRANCH_NAME="$(date +'%Y.%m.%d')"
+
+    LAND_MSG="Verificacao de existencia de branch com o nome ${BRANCH_NAME}"
+    if ${TMGIT} checkout "${BRANCH_NAME}" > /dev/null 2>&1 
+    then
+        LAND_ERRMSG="Branch alterada para ${BRANCH_NAME} com sucesso"
+    else
+        create-branch "$@"
+    fi
+}
+
 ## Preparar ambiente
 function fm_climb() {
 
@@ -99,4 +130,5 @@ function fm_climb() {
     LAND_CALLER="${LAND_CALLER} -> fm_climb"
 
     create-repo "$@"
+    check-branch "$@"
 }

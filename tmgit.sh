@@ -15,8 +15,8 @@ function main() {
     fm_climb "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
     
     # Realizar as operações que compreendem a lógica central do projeto
-    # fm_fly $@
-
+    fm_fly "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
+ 
     # Realizar tratamentos de erro e geração de logs
     fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
 }

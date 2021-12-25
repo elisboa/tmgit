@@ -89,6 +89,28 @@ function create-repo() {
     fi
 }
 
+function check-branch() {
+
+    LAND_CALLER="${LAND_CALLER} -> check-branch"
+
+    BRANCH_NAME="$(date +'%Y.%m.%d')"
+
+    LAND_MSG="Verificacao de existencia de branch com o nome ${BRANCH_NAME}"
+    if ${TMGIT} checkout ${BRANCH_NAME} 2>&1 > /dev/null
+    then
+        LAND_ERRMSG="Branch alterada para ${BRANCH_NAME} com sucesso"
+    else
+        if ${TMGIT} checkout -b "${BRANCH_NAME}" 2>&1 > /dev/null
+        then
+            LAND_ERRMSG="Branch ${BRANCH_NAME} criada com sucesso"
+        else
+            let LAND_ERRLVL+=1
+            LAND_ERRMSG="Não foi possível criar a branch ${BRANCH_NAME}"
+            fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
+        fi
+    fi
+}
+
 ## Preparar ambiente
 function fm_climb() {
 
@@ -99,4 +121,5 @@ function fm_climb() {
     LAND_CALLER="${LAND_CALLER} -> fm_climb"
 
     create-repo "$@"
+    check-branch "$@"
 }

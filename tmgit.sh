@@ -24,9 +24,16 @@ function main() {
 # Carregar o arquivo que abstrai as funções o modo-avião
 # shellcheck source=/dev/null
 
-source "$(dirname ${0})/fm_preflight.sh"
-source "$(dirname ${0})/fm_climb.sh"
-source "$(dirname ${0})/fm_fly.sh"
-source "$(dirname ${0})/fm_land.sh"
+for file in fm_{preflight,climb,fly,land}.sh
+do
+    echo -ne "Importando arquivo ${file}: "
+    if source "$(dirname "${0}")/${file}" > /dev/null 2>&1
+    then
+        echo -e "OK"
+    else
+        echo -e "FALHOU\n"
+        exit 1
+    fi
+done
 
 main "$@"

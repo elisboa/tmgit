@@ -1,5 +1,6 @@
 # Encerrar operações
 function fm_land() {
+
     # Esperados 4 argumentos:
     # 1. Número do código de erro (se vazio ou 0, sair com sucesso)
     LAND_ERRLVL="${1}"
@@ -10,6 +11,8 @@ function fm_land() {
     # 4. Mensagem de erro (opcional)
     LAND_ERRMSG="${4}"
 
+
+    LAND_CALLER="${LAND_CALLER} -> fm_land"
 
     # Exibir as mensagens abaixo APENAS se a variável contiver alguma coisa
     if [[ -n ${LAND_CALLER} ]]

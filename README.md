@@ -44,9 +44,8 @@ Estas funções todas devem estar organizadas dentro das quatro funções macro 
 - preparação para o "voo" (git add; git remove etc)
 
 #### fm_fly
-- efetivação das mudanças: git commit
+- efetivação das mudanças: git add; git remove; git commit
 - em caso de parâmetros adicionais, executá-los aqui, como: version-all; push-remote; add-files etc
-
 
 #### fm_land
 - tratamento de erros

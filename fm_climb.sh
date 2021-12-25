@@ -60,7 +60,7 @@ function check-status() {
     LAND_MSG="Verificando estado do repositorio"
     # Tudo bem falhar nos comandos acima. Mas o git status não pode falhar!
     # Se ele falhar, aí sim a gente chama a função fm_land
-    if git --git-dir "${TMGIT_DIR}" --work-tree "${TMGIT_TREE}" status 2>&1 > /dev/null
+    if ${TMGIT} status 2>&1 > /dev/null
     then
         LAND_ERRMSG="Repositorio OK"
     else

@@ -6,12 +6,12 @@
 ### Uso:
 
 ```
-./main.sh [diretorio a ser versionado] <diretorio de versionamento do tmgit> (opcional)
+./tmgit.sh [diretorio a ser versionado] <diretorio de versionamento do tmgit> (opcional)
 ```
 
 Por exemplo: 
-1. `./main.sh /home/usuario` ─ ele criará o "gitdir" em /home/usuario/.tmgit
-2. `./main.sh /home/usuario /home/usuario/.meugitdir` ─ ele criará o "gitdir" em /home/usuario/.meugitdir
+1. `./tmgit.sh /home/usuario` ─ ele criará o "gitdir" em /home/usuario/.tmgit
+2. `./tmgit.sh /home/usuario /home/usuario/.meugitdir` ─ ele criará o "gitdir" em /home/usuario/.meugitdir
 
 ---
 
@@ -20,10 +20,10 @@ Por exemplo:
 Este projeto é uma reescrita do original [linux-time-machine](https://github.com/elisboa/linux-time-machine.sh). A ideia é tornar o código mais legível e ter um controle maior dos erros. Não significa que o código será exatamente menor nem mais eficiente.
 
 Neste item, vamos descrever o funcionamento do projeto e então dividi-lo entre as 4 funções principais:
-1. fm_preflight
-2. fm_climb
-3. fm_fly
-4. fm_land
+1. `fm_preflight`
+2. `fm_climb`
+3. `fm_fly`
+4. `fm_land`
 
 Basicamente, a máquina do tempo executa as seguintes funções:
 - recebe um ou dois parâmetros: diretório a ser versionado (obrigatório); diretório do git (opcional)
@@ -44,9 +44,8 @@ Estas funções todas devem estar organizadas dentro das quatro funções macro 
 - preparação para o "voo" (git add; git remove etc)
 
 #### fm_fly
-- efetivação das mudanças: git commit
+- efetivação das mudanças: git add; git remove; git commit
 - em caso de parâmetros adicionais, executá-los aqui, como: version-all; push-remote; add-files etc
-
 
 #### fm_land
 - tratamento de erros

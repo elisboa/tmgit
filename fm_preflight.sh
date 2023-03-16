@@ -5,7 +5,7 @@ function set-vars() {
     # O primerio argumento passado deve ser o diretório de trabalho onde os arquivos serão versionados (/home/user, por exemplo)
     export TMGIT_TREE="${1}"
     # O segundo argumento passado deve ser o diretório ".git" do repositório 
-    export TMGIT_DIR="${2}"
+    export TMGIT_DIR="${1}/.tmgit/.git"
     # Pegando o caminho do binário do git
 	TMGIT_GIT="$(command -v git 2> /dev/null)"
     export TMGIT_GIT

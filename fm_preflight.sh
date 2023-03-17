@@ -23,7 +23,7 @@ function set-vars() {
     TODAY_DATE="DEVE SER ANO.MES.DIA USANDO O COMANDO DATE, COMO EM AAAA.MM.DD"
     export TODAY_DATE
 
-    COMMIT_DATE="DEVE SER ANO.MES.DIA.HORA.MINUTO.SEGUNDO USANDO O COMANDO DATE"
+    COMMIT_DATE="$(date +'%Y.%m.%d-%H.%M')"
     export COMMIT_DATE
     # Force current language to C, so all git messages are in default english
     LANG="C"

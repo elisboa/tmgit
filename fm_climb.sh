@@ -60,8 +60,7 @@ function check-status() {
     LAND_MSG="Verificando estado do repositorio"
     # Tudo bem falhar nos comandos acima. Mas o git status não pode falhar!
     # Se ele falhar, aí sim a gente chama a função fm_land
-    echo $TMGIT
-    if ${TMGIT} status # > /dev/null 2>&1
+    if ${TMGIT} status > /dev/null 2>&1
     then
         LAND_ERRMSG="Repositorio OK"
     else

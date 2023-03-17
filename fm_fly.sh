@@ -13,6 +13,22 @@ function commit-files {
   fi
 }
 
+function tag-commit() {
+
+  LAND_CALLER="${LAND_CALLER} -> tag-commit"
+
+  LAND_MSG="Iniciando tagging do commit às ${COMMIT_DATE}"
+  if $TMGIT tag "${COMMIT_DATE}" >& /dev/null
+  then
+    LAND_ERRMSG="Tag ${COMMIT_DATE} aplicada com sucesso"
+  else
+    let LAND_ERRLVL+=1
+    LAND_ERRMSG="Não foi possível aplicar a tag ${COMMIT_DATE}"
+    fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
+  fi
+
+}
+
 function fm_fly {
 
   LAND_ERRLVL="$1"

@@ -2,7 +2,7 @@ function commit-files {
 
   LAND_CALLER="${LAND_CALLER} -> commit-files"
 
-  LAND_MSG="Iniciando commit das mudanças"
+  LAND_MSG="Iniciando commit das mudanças às ${COMMIT_DATE}"
   if $TMGIT commit -a -m "$($TMGIT diff HEAD --name-only | xargs ; echo -e "\n") Commit automático realizado às ${COMMIT_DATE}" >& /dev/null
   then
     LAND_ERRMSG="Mudanças commitadas com sucesso"

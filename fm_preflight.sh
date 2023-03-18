@@ -14,8 +14,9 @@ function set-vars() {
   TMGIT="${TMGIT_GIT} ${TMGIT_ARGS}"
   export TMGIT
   # Tratando o segundo argumento passado
-  TMGIT_PARAM="${2}"
-  export TMGIT_PARAM
+  TMGIT_PARAMS="${*}"
+  export TMGIT_PARAMS
+
 
   # variáveis utilizadas pelo git parametrizado (tmgit)
   # Check which branch we are
@@ -64,8 +65,6 @@ function check-args () {
       # Encerrar programa enviando mensagens de erro e função chamadora
       fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
     fi
-  else
-    check-params
   fi
 
   # Verificar se a variável TMGIT_GIT contém algum conteúdo válido

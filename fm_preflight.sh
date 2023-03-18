@@ -46,7 +46,7 @@ function check-args () {
   then
     if [[ ${#} -eq 1 ]]
     then
-        TMGIT_DIR="${TMGIT_TREE}/.tmgit"
+      TMGIT_DIR="${TMGIT_TREE}/.tmgit"
     else
       ((LAND_ERRLVL++))
       LAND_ERRMSG="Uso: ${0} [diretorio a ser versionado] <diretorio de versionamento do tmgit> (opcional)"

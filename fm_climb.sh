@@ -116,6 +116,47 @@ function check-branch() {
   fi
 }
 
+function add-file() {
+
+  LAND_CALLER="${LAND_CALLER} -> add-file"
+
+  LAND_MSG="Adicionando arquivo(s) ao repositório: ${1}"
+  #echo "${LAND_MSG}"
+  #echo "${TMGIT}"
+ 
+  if ${TMGIT} add -f ${1} > /dev/null 2>&1
+  then
+    LAND_ERRMSG="Arquivo(s) adicionado(s) com sucesso: ${1}"
+  else
+    LAND_ERRMSG="Falha ao adicionar arquivo(s): ${1}"
+    ((LAND_ERRLVL++))
+    fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"    
+  fi
+
+}
+
+# Este nome precisa ser melhorado
+# Esta função irá tratar todos os argumentos passados para o script inicial
+function check-params () {
+
+  LAND_CALLER="${LAND_CALLER} -> check-params"
+
+  LAND_MSG="${#} parâmetros passados: ${*}"
+  # Para cada argumento passado, vamos validar se ele se encaixa em algum dos parâmetros suportados
+  for param in "${@}"
+  do
+    LAND_MSG="Validando parâmetro ${param}"
+
+    case "${param}" in
+      add-file) 
+        add-file "${2}" ;;
+    esac
+  
+    shift
+  done
+
+}
+
 ## Preparar ambiente
 function fm_climb() {
 

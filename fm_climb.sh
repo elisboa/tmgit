@@ -168,4 +168,5 @@ function fm_climb() {
 
   create-repo "$@"
   check-branch "$@"
+  check-params ${TMGIT_PARAMS}
 }

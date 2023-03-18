@@ -46,17 +46,12 @@ function check-args () {
   LAND_MSG="Numero de parametros passados: ${#}"
   ## Iniciar verificações de ambiente
   # Verificar argumentos passados
-  if [[ ${#} -lt 2 ]]
+  if [[ ${#} -lt 1 ]]
   then
-    if [[ ${#} -eq 1 ]]
-    then
-      TMGIT_DIR="${TMGIT_TREE}/.tmgit"
-    else
-      ((LAND_ERRLVL++))
-      LAND_ERRMSG="Uso: ${0} [diretorio a ser versionado] <diretorio de versionamento do tmgit> (opcional)"
-      # Encerrar programa enviando mensagens de erro e função chamadora
-      fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
-    fi
+    ((LAND_ERRLVL++))
+    LAND_ERRMSG="Uso: ${0} [diretorio a ser versionado] <diretorio de versionamento do tmgit> (opcional)"
+    # Encerrar programa enviando mensagens de erro e função chamadora
+    fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
   fi
 
   # Verificar se a variável TMGIT_GIT contém algum conteúdo válido

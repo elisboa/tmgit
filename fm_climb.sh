@@ -2,6 +2,16 @@ function init-repo() {
 
   LAND_CALLER="${LAND_CALLER} -> init-repo"
 
+  LAND_MSG="Criação do diretório ${TMGIT_DIR}"
+  if mkdir -p "${TMGIT_DIR}" > /dev/null 2>&1
+  then
+    LAND_ERRMSG="Diretório ${TMGIT_DIR} criado com sucesso"
+  else
+    ((LAND_ERRLVL++))
+    LAND_ERRMSG="Falha ao criar o diretório ${TMGIT_DIR}"
+    fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
+  fi
+
   LAND_MSG="Inicialização do diretório ${TMGIT_TREE} tendo como diretório de controle o ${TMGIT_DIR}"
   if ${TMGIT} init > /dev/null 2>&1
   then

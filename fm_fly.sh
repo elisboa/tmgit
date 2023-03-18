@@ -7,7 +7,7 @@ function commit-files {
   then
     LAND_ERRMSG="Mudanças commitadas com sucesso"
   else
-    let LAND_ERRLVL+=1
+    ((LAND_ERRLVL++))
     LAND_ERRMSG="Não foi possível commitar as mudanças"
     fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
   fi
@@ -22,7 +22,7 @@ function tag-commit() {
   then
     LAND_ERRMSG="Tag ${COMMIT_DATE} aplicada com sucesso"
   else
-    let LAND_ERRLVL+=1
+    ((LAND_ERRLVL++))
     LAND_ERRMSG="Não foi possível aplicar a tag ${COMMIT_DATE}"
     fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
   fi

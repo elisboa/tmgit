@@ -48,7 +48,7 @@ function check-args () {
         then
             TMGIT_DIR="${TMGIT_TREE}/.tmgit"
         else
-            let LAND_ERRLVL+=1
+          ((LAND_ERRLVL++))
             LAND_ERRMSG="Uso: ${0} [diretorio a ser versionado] <diretorio de versionamento do tmgit> (opcional)"
             LAND_MSG="Numero de parametros passados: ${#}"
             # Encerrar programa enviando mensagens de erro e função chamadora
@@ -60,7 +60,7 @@ function check-args () {
     LAND_MSG="Verificacao do executavel do git"
     if [[ -z "${TMGIT_GIT}" ]]
     then
-        let LAND_ERRLVL+=1
+      ((LAND_ERRLVL++))
         LAND_ERRMSG="Arquivo executável do git não encontrado"
 
         # Encerrar programa enviando mensagens de erro e função chamadora
@@ -70,7 +70,7 @@ function check-args () {
         # Verificar se TMGIT_GIT aponta para um executável válido
         if [[ ! -x "${TMGIT_GIT}" ]]
         then
-            let LAND_ERRLVL+=1
+          ((LAND_ERRLVL++))
             LAND_ERRMSG="Arquivo ${TMGIT_GIT} não é executável"
             # Encerrar programa enviando mensagens de erro e função chamadora
             fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"

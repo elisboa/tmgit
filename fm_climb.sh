@@ -7,19 +7,6 @@ function init-repo() {
   then
     LAND_ERRMSG="Diretorio ${TMGIT_DIR} inicializado com sucesso"
   else
-    if [[ -e "${TMGIT_TREE}/.git" ]]  && grep ^gitdir "${TMGIT_TREE}/.git" > /dev/null 2>&1
-    then
-      ((LAND_ERRLVL++))
-      LAND_ERRMSG="Diretorio referenciado no arquivo ${TMGIT_TREE}/.git porem inexistente no disco"
-      fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
-    else
-      if [[ -e "${TMGIT_TREE}"/.git ]]
-      then
-          ((LAND_ERRLVL++))
-          LAND_ERRMSG="Entrada para o diretorio ${TMGIT_DIR} inexistente no arquivo ${TMGIT_TREE}/.git"
-          fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
-      fi
-    fi
     ((LAND_ERRLVL++))
     LAND_ERRMSG="Falha ao inicializar o diretorio ${TMGIT_DIR}"
     fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
@@ -37,17 +24,26 @@ function check-gitignore() {
   else
     if [[ ! -d "${TMGIT_TREE}/.gitignore" ]] 
     then
-      if echo "*" > "${TMGIT_TREE}/.gitignore" 2> /dev/null
+      if echo "*" >> "${TMGIT_TREE}/.gitignore" 2> /dev/null
       then
-        LAND_ERRMSG="Adicionado arquivo .gitignore com sucesso"
+        LAND_ERRMSG="Criado arquivo .gitignore com sucesso"
       else
         ((LAND_ERRLVL++))
-         LAND_ERRMSG="Falha ao adicionar arquivo .gitignore"
+         LAND_ERRMSG="Falha ao criar arquivo .gitignore"
          fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"    
       fi
+    LAND_MSG="Versionando arquivo .gitignore"
+    if ${TMGIT} add -f .gitignore > /dev/null 2>&1
+    then
+      LAND_ERRMSG="Arquivo .gitignore versionado com sucesso"
     else
       ((LAND_ERRLVL++))
-      LAND_ERRMSG="Existe um diretorio no caminho ${TMGIT_TREE}/gitignore e deveria ser um arquivo"
+      LAND_ERRMSG="Falha ao versionar arquivo .gitignore"
+      fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"    
+    fi
+    else
+      ((LAND_ERRLVL++))
+      LAND_ERRMSG="Existe um diretorio no caminho ${TMGIT_TREE}/.gitignore e deveria ser um arquivo"
       fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
     fi
   fi
@@ -75,7 +71,7 @@ function create-repo() {
   LAND_CALLER="${LAND_CALLER} -> create-repo"
 
   # Tentando criar o diretorio onde a maquina do tempo seria versionada (o git dir)
-  LAND_MSG="Verificacao do diretorio de controle do TMGIT em ${TMGIT_DIR}"
+  LAND_MSG="Verificacao do diretorio a ser versionado: ${TMGIT_TREE}"
   if [[ -d "${TMGIT_TREE}" ]]
   then
         

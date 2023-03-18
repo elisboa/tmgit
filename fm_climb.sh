@@ -3,7 +3,7 @@ function init-repo() {
   LAND_CALLER="${LAND_CALLER} -> init-repo"
 
   LAND_MSG="Inicialização do diretório ${TMGIT_TREE} tendo como diretório de controle o ${TMGIT_DIR}"
-  if git init "${TMGIT_TREE}" --separate-git-dir "${TMGIT_DIR}" > /dev/null 2>&1
+  if ${TMGIT} init > /dev/null 2>&1
   then
     LAND_ERRMSG="Diretorio ${TMGIT_DIR} inicializado com sucesso"
   else

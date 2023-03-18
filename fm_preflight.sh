@@ -43,12 +43,14 @@ function set-vars() {
 function check-params () {
 
   LAND_CALLER="${LAND_CALLER} -> check-params"
+
 }
 
 function check-args () {
 
   LAND_CALLER="${LAND_CALLER} -> check-args"
 
+  LAND_MSG="Numero de parametros passados: ${#}"
   ## Iniciar verificações de ambiente
   # Verificar argumentos passados
   if [[ ${#} -lt 2 ]]
@@ -59,7 +61,6 @@ function check-args () {
     else
       ((LAND_ERRLVL++))
       LAND_ERRMSG="Uso: ${0} [diretorio a ser versionado] <diretorio de versionamento do tmgit> (opcional)"
-      LAND_MSG="Numero de parametros passados: ${#}"
       # Encerrar programa enviando mensagens de erro e função chamadora
       fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
     fi

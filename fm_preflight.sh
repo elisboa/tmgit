@@ -39,14 +39,6 @@ function set-vars() {
   export LAND_CALLER="" # "NOME DA FUNÇÃO QUE CHAMA A FUNÇÃO DE ENCERRAMENTO"
 }
 
-# Este nome precisa ser melhorado
-# Esta função irá tratar todos os argumentos passados para o script inicial
-function check-params () {
-
-  LAND_CALLER="${LAND_CALLER} -> check-params"
-
-}
-
 function check-args () {
 
   LAND_CALLER="${LAND_CALLER} -> check-args"

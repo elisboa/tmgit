@@ -147,9 +147,12 @@ function check-params () {
   do
     LAND_MSG="Validando parâmetro ${param}"
 
+    # Aqui a gente valida e chama cada parâmetro válido passado
     case "${param}" in
       add-file) 
         add-file "${2}" ;;
+      push-remote)
+        echo push-remote ;;
     esac
   
     shift

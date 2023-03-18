@@ -5,8 +5,7 @@ function set-vars() {
   # O primerio argumento passado deve ser o diretório de trabalho onde os arquivos serão versionados (/home/user, por exemplo)
   export TMGIT_TREE="${1}"
   # O segundo argumento passado deve ser o diretório ".git" do repositório 
-  export TMGIT_DIR="${1}/.tmgit/.git"
-  # Pegando o caminho do binário do git
+  export TMGIT_DIR="${TMGIT_TREE}/.tmgit/.git"
   TMGIT_GIT="$(command -v git 2> /dev/null)"
   export TMGIT_GIT
   # Montando os parâmetros passados para o GIT
@@ -14,6 +13,10 @@ function set-vars() {
   # concatenando o caminho do binário do git com os argumentos passados
   TMGIT="${TMGIT_GIT} ${TMGIT_ARGS}"
   export TMGIT
+  # Tratando o segundo argumento passado
+  TMGIT_PARAMS="${*}"
+  export TMGIT_PARAMS
+
 
   # variáveis utilizadas pelo git parametrizado (tmgit)
   # Check which branch we are
@@ -40,20 +43,15 @@ function check-args () {
 
   LAND_CALLER="${LAND_CALLER} -> check-args"
 
+  LAND_MSG="Numero de parametros passados: ${#}"
   ## Iniciar verificações de ambiente
   # Verificar argumentos passados
-  if [[ ${#} -lt 2 ]]
+  if [[ ${#} -lt 1 ]]
   then
-    if [[ ${#} -eq 1 ]]
-    then
-      TMGIT_DIR="${TMGIT_TREE}/.tmgit"
-    else
-      ((LAND_ERRLVL++))
-      LAND_ERRMSG="Uso: ${0} [diretorio a ser versionado] <diretorio de versionamento do tmgit> (opcional)"
-      LAND_MSG="Numero de parametros passados: ${#}"
-      # Encerrar programa enviando mensagens de erro e função chamadora
-      fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
-    fi
+    ((LAND_ERRLVL++))
+    LAND_ERRMSG="Uso: ${0} [diretorio a ser versionado] <diretorio de versionamento do tmgit> (opcional)"
+    # Encerrar programa enviando mensagens de erro e função chamadora
+    fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
   fi
 
   # Verificar se a variável TMGIT_GIT contém algum conteúdo válido

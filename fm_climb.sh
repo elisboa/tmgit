@@ -9,18 +9,18 @@ function init-repo() {
   else
     if [[ -e "${TMGIT_TREE}/.git" ]]  && grep ^gitdir "${TMGIT_TREE}/.git" > /dev/null 2>&1
     then
-      let LAND_ERRLVL+=1
+      ((LAND_ERRLVL++))
       LAND_ERRMSG="Diretorio referenciado no arquivo ${TMGIT_TREE}/.git porem inexistente no disco"
       fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
     else
       if [[ -e "${TMGIT_TREE}"/.git ]]
       then
-          let LAND_ERRLVL+=1
+          ((LAND_ERRLVL++))
           LAND_ERRMSG="Entrada para o diretorio ${TMGIT_DIR} inexistente no arquivo ${TMGIT_TREE}/.git"
           fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
       fi
     fi
-    let LAND_ERRLVL+=1
+    ((LAND_ERRLVL++))
     LAND_ERRMSG="Falha ao inicializar o diretorio ${TMGIT_DIR}"
     fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
   fi
@@ -41,12 +41,12 @@ function check-gitignore() {
       then
         LAND_ERRMSG="Adicionado arquivo .gitignore com sucesso"
       else
-        let LAND_ERRLVL+=1
+        ((LAND_ERRLVL++))
          LAND_ERRMSG="Falha ao adicionar arquivo .gitignore"
          fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"    
       fi
     else
-      let LAND_ERRLVL+=1
+      ((LAND_ERRLVL++))
       LAND_ERRMSG="Existe um diretorio no caminho ${TMGIT_TREE}/gitignore e deveria ser um arquivo"
       fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
     fi
@@ -64,7 +64,7 @@ function check-status() {
   then
     LAND_ERRMSG="Repositorio OK"
   else
-    let LAND_ERRLVL+=1
+    ((LAND_ERRLVL++))
     LAND_ERRMSG="Falha ao verificar estado do repositorio"
     fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
   fi
@@ -83,7 +83,7 @@ function create-repo() {
     check-gitignore "$@"
     check-status "$@"
   else
-    let LAND_ERRLVL+=1
+    ((LAND_ERRLVL++))
     LAND_ERRMSG="Falha ao acessar diretório ${TMGIT_DIR}"
     fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
   fi
@@ -99,7 +99,7 @@ function create-branch() {
     LAND_ERRMSG="Branch ${BRANCH_NAME} criada com sucesso"
     ${TMGIT} commit --allow-empty -m":tada: Criada nova branch ${BRANCH_NAME}" > /dev/null 2>&1
   else
-    let LAND_ERRLVL+=1
+    ((LAND_ERRLVL++))
     LAND_ERRMSG="Não foi possível criar a branch ${BRANCH_NAME}"
     fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
   fi

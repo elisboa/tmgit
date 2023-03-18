@@ -162,7 +162,7 @@ function check-params () {
       add-file) 
         add-file "${2}" ;;
       push-remote)
-        echo push-remote ;;
+        push-remote ;;
     esac
   
     shift

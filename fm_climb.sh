@@ -178,9 +178,11 @@ function check-params () {
 
     # Aqui a gente valida e chama cada parâmetro válido passado
     case "${param}" in
-      add-file) 
+      add-file)
         add-file "${2}" ;;
-      push-remote)
+      del-file)
+        del-file "${2}" ;;
+       push-remote)
         push-remote ;;
     esac
   

@@ -26,7 +26,10 @@ function set-vars() {
   TODAY_DATE="DEVE SER ANO.MES.DIA USANDO O COMANDO DATE, COMO EM AAAA.MM.DD"
   export TODAY_DATE
 
-  COMMIT_DATE="$(date +'%Y.%m.%d-%H.%M')"
+  # Aqui a gente tenta primeiro o gdate porque nos BSDs ele é o único que tem suporte a milissegundos
+  # Se falhar, chama o date mesmo
+  # Isto é um bug, precisa ser melhor escrito, ou há o risco de as tags ficarem com 3N em BSDs que não tenham o gdate instalado
+  COMMIT_DATE="$(gdate +'%Y.%m.%d-%H.%M.%3N' || date +'%Y.%m.%d-%H.%M.%3N')"
   export COMMIT_DATE
   # Force current language to C, so all git messages are in default english
   LANG="C"

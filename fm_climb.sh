@@ -145,6 +145,25 @@ function add-file() {
 
 }
 
+function del-file() {
+
+  LAND_CALLER="${LAND_CALLER} -> del-file"
+
+  LAND_MSG="Removendo arquivo(s) do repositório: ${1}"
+  #echo "${LAND_MSG}"
+  #echo "${TMGIT}"
+
+  if ${TMGIT} rm --cached -f -r ${1} > /dev/null 2>&1
+  then
+    LAND_ERRMSG="Arquivo(s) removido(s) com sucesso: ${1}"
+  else
+    LAND_ERRMSG="Falha ao remover arquivo(s): ${1}"
+    ((LAND_ERRLVL++))
+    fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
+  fi
+
+}
+
 # Este nome precisa ser melhorado
 # Esta função irá tratar todos os argumentos passados para o script inicial
 function check-params () {

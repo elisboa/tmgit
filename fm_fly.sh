@@ -39,7 +39,7 @@ function push-remote() {
   $TMGIT remote -v
   for repo in $(${TMGIT} remote | xargs)
   do
-    if $TMGIT push "${repo}" -u --mirror --follow-tags  # >& /dev/null
+    if timeout 30 $TMGIT push "${repo}" -u --all --follow-tags  # >& /dev/null
     then
       LAND_ERRMSG="Push efetuado com sucesso para o repositório remoto $repo"
       echo $LAND_MSG

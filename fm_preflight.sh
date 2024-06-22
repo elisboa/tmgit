@@ -126,4 +126,5 @@ function fm_preflight() {
   LAND_CALLER="fm_preflight"
 
   check-args "$@"
+  check-lock "$@"
 }

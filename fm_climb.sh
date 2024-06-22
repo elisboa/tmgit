@@ -134,7 +134,7 @@ function add-file() {
   #echo "${LAND_MSG}"
   #echo "${TMGIT}"
  
-  if ${TMGIT} add -f ${1} > /dev/null 2>&1
+  if ${TMGIT} add -f "${1}" > /dev/null 2>&1
   then
     LAND_ERRMSG="Arquivo(s) adicionado(s) com sucesso: ${1}"
   else
@@ -153,7 +153,7 @@ function del-file() {
   #echo "${LAND_MSG}"
   #echo "${TMGIT}"
 
-  if ${TMGIT} rm --cached -f -r ${1} > /dev/null 2>&1
+  if ${TMGIT} rm --cached -f -r "${1}" > /dev/null 2>&1
   then
     LAND_ERRMSG="Arquivo(s) removido(s) com sucesso: ${1}"
   else
@@ -202,5 +202,5 @@ function fm_climb() {
 
   create-repo "$@"
   check-branch "$@"
-  check-params ${TMGIT_PARAMS}
+  check-params "${TMGIT_PARAMS}"
 }

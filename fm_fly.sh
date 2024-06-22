@@ -34,19 +34,19 @@ function push-remote() {
   LAND_CALLER="${LAND_CALLER} -> push-remote"
 
   LAND_MSG="Iniciando git-push às ${COMMIT_DATE}"
-  echo $LAND_MSG
-  echo TMGIT vale $TMGIT
+  echo "${LAND_MSG}"
+  echo TMGIT vale "${TMGIT}"
   $TMGIT remote -v
   for repo in $(${TMGIT} remote | xargs)
   do
-    if timeout 30 $TMGIT push "${repo}" -u --all --follow-tags  # >& /dev/null
+    if timeout 30 "${TMGIT}" push "${repo}" -u --all --follow-tags  # >& /dev/null
     then
       LAND_ERRMSG="Push efetuado com sucesso para o repositório remoto $repo"
-      echo $LAND_MSG
+      echo "${LAND_MSG}"
     else
       ((LAND_ERRLVL++))
       LAND_ERRMSG="Não foi possível enviar as mudanças para o repositório remoto $repo"
-      echo $LAND_ERRMSG
+      echo "${LAND_ERRMSG}"
       #fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
   fi
   done
@@ -59,7 +59,7 @@ function fm_fly {
   LAND_CALLER="$2"
   LAND_MSG="$3"
 
-  LAND_CALLER="${LAND_CALLER} -> fm_fly"
+  LAND_CALLER="$LAND_CALLER -> fm_fly"
 
   # Esses nomes precisam ser melhorados depois - pend
   commit-files

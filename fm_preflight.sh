@@ -102,7 +102,7 @@ function check-lock () {
   LAND_CALLER="${LAND_CALLER} -> check-lock"
   LAND_MSG="Verificando se o arquivo de lock existe"
 
-  if [[ -e "${TMGIT_TREE}/.tmgit/.lock" ]]
+  if [[ -e "${TMGIT_TREE}/.tmgit/.git/index.lock" ]]
   then
     ((LAND_ERRLVL++))
     LAND_ERRMSG="Arquivo de lock já existe"

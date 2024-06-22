@@ -97,6 +97,21 @@ function check-args () {
 
 }
 
+function check-lock () {
+
+  LAND_CALLER="${LAND_CALLER} -> check-lock"
+  LAND_MSG="Verificando se o arquivo de lock existe"
+
+  if [[ -e "${TMGIT_TREE}/.tmgit/.lock" ]]
+  then
+    ((LAND_ERRLVL++))
+    LAND_ERRMSG="Arquivo de lock já existe"
+    fm_land "${LAND_ERRLVL}" "${LAND_CALLER}" "${LAND_MSG}" "${LAND_ERRMSG}"
+  else
+    LAND_ERRMSG="Arquivo de lock não encontrado"
+  fi
+}
+
 function fm_preflight() {
 
   set-vars "$@"

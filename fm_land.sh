@@ -21,12 +21,12 @@ function fm_land() {
 
   if [[ -n ${LAND_MSG} ]]
   then
-    echo "Encerrando programa: ${LAND_MSG}"
+    echo "Encerramento: ${LAND_MSG}"
   fi
 
   if [[ -n ${LAND_ERRMSG} ]]
   then
-    echo "Mensagem de erro: ${LAND_ERRMSG}"
+    echo "Erro ou aviso: ${LAND_ERRMSG}"
   fi
 
   if [[ -n ${LAND_ERRLVL} ]]
